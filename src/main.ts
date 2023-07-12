@@ -1,5 +1,15 @@
-let stringArr = ["one", "hey", "dave"];
+type mathFunction = (a: number, b: number) => number;
+// interface mathFunction {
+//   (a: number, b: number): number;
+// }
 
-let guitars = ["Strat", "Les Paul", 5150];
+let multiply: mathFunction = function (c, d) {
+  return c * d;
+};
 
-let mixedData = ["EVH", 1984, true];
+console.log(multiply(5, 5));
+
+// Optional Parameters
+const addAll = (a: number, b: number, c: number): number => {
+  return a + b + c;
+};
