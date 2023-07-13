@@ -1,25 +1,28 @@
 "use strict";
-// interface mathFunction {
-//   (a: number, b: number): number;
-// }
-let multiply = function (c, d) {
-    return c * d;
+// type mathFunction = (a: number, b: number) => number;
+// // interface mathFunction {
+// //   (a: number, b: number): number;
+// // }
+// Convert to more or less specific
+let a = "hello";
+let b = a; // Less specific
+let c = a; //More specific
+let d = "world";
+let e = "world";
+const addOrConcat = (a, b, c) => {
+    if (c === "add")
+        return a + b;
+    return "" + a + b;
 };
-// console.log(multiply(5, 5));
-// Optional Parameters
-const addAll = (a, b, c) => {
-    if (typeof c !== "undefined") {
-        return a + b + c;
-    }
-    return a + b;
-};
-const sumAll = (a, b, c = 2) => {
-    return a + b + c;
-};
-console.log(sumAll(5, 5, 7));
-console.log(sumAll(5, 7));
-// Rest Parameters
-const total = (a, ...nums) => {
-    return nums.reduce((prev, curr) => prev + curr);
-};
-console.log(total(1, 2, 3, 4));
+let myVal = addOrConcat(2, 2, "concat");
+// Be careful! TS sees no problem - but a string is returned
+let nextVal = addOrConcat(2, 2, "concat");
+// 10 as string;
+// Over ruling typescript
+10;
+// The Dom
+const img = document.querySelector("img");
+const myImg = document.getElementById("#img");
+const nextImg = document.getElementById("#img");
+img.src;
+myImg.src;
