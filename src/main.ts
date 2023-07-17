@@ -303,9 +303,9 @@
 
 // const echo = <T>(arg: T): T => arg;
 
-const isObj = <T>(arg: T): boolean => {
-  return typeof arg === "object" && !Array.isArray(arg) && arg !== null;
-};
+// const isObj = <T>(arg: T): boolean => {
+//   return typeof arg === "object" && !Array.isArray(arg) && arg !== null;
+// };
 
 // console.log(isObj(true));
 // console.log(isObj("John"));
@@ -337,114 +337,139 @@ const isObj = <T>(arg: T): boolean => {
 // console.log(isTrue(NaN));
 // console.log(isTrue(-0));
 
-interface BoolCheck<T> {
-  value: T;
-  is: boolean;
+// interface BoolCheck<T> {
+//   value: T;
+//   is: boolean;
+// }
+
+// const checkBoolValue = <T>(arg: T): BoolCheck<T> => {
+//   if (Array.isArray(arg) && !arg.length) {
+//     return { value: arg, is: false };
+//   }
+//   if (isObj(arg) && !Object.keys(arg as keyof T)) {
+//     return { value: arg, is: false };
+//   }
+//   return { value: arg, is: !!arg };
+// };
+
+// interface HasID {
+//   id: number;
+// }
+
+// const processUser = <T extends HasID>(user: T): T => {
+//   // Process the user logic here
+//   return user;
+// };
+// console.log(processUser({ id: 1, name: "Dave" }));
+// // console.log(processUser({ name: "Dave" }));
+
+// const getUsersProperty = <T extends HasID, K extends keyof T>(
+//   users: T[],
+//   key: K
+// ): T[K][] => {
+//   return users.map((user) => user[key]);
+// };
+
+// const usersArray = [
+//   {
+//     id: 1,
+//     name: "Leanne Graham",
+//     username: "Bret",
+//     email: "Sincere@april.biz",
+//     address: {
+//       street: "Kulas Light",
+//       suite: "Apt. 556",
+//       city: "Gwenborough",
+//       zipcode: "92998-3874",
+//       geo: {
+//         lat: "-37.3159",
+//         lng: "81.1496",
+//       },
+//     },
+//     phone: "1-770-736-8031 x56442",
+//     website: "hildegard.org",
+//     company: {
+//       name: "Romaguera-Crona",
+//       catchPhrase: "Multi-layered client-server neural-net",
+//       bs: "harness real-time e-markets",
+//     },
+//   },
+//   {
+//     id: 2,
+//     name: "Ervin Howell",
+//     username: "Antonette",
+//     email: "Shanna@melissa.tv",
+//     address: {
+//       street: "Victor Plains",
+//       suite: "Suite 879",
+//       city: "Wisokyburgh",
+//       zipcode: "90566-7771",
+//       geo: {
+//         lat: "-43.9509",
+//         lng: "-34.4618",
+//       },
+//     },
+//     phone: "010-692-6593 x09125",
+//     website: "anastasia.net",
+//     company: {
+//       name: "Deckow-Crist",
+//       catchPhrase: "Proactive didactic contingency",
+//       bs: "synergize scalable supply-chains",
+//     },
+//   },
+// ];
+
+// console.log(getUsersProperty(usersArray, "email"));
+// console.log(getUsersProperty(usersArray, "username"));
+
+// ///////////////////////////////////////
+
+// class StateObject<T> {
+//   private data: T;
+
+//   constructor(value: T) {
+//     this.data = value;
+//   }
+
+//   get state(): T {
+//     return this.data;
+//   }
+
+//   set state(value: T) {
+//     this.data = value;
+//   }
+// }
+
+// const store = new StateObject("John");
+// console.log(store.state);
+// store.state = "Dave";
+// //store.state = 12
+
+// const myState = new StateObject<(string | number | boolean)[]>([15]);
+// myState.state = ["Dave", 42, true];
+// console.log(myState.state);
+
+// Utility Types
+// Partial
+interface Assignment {
+  studentId: string;
+  title: string;
+  grade: number;
+  verified?: boolean;
 }
 
-const checkBoolValue = <T>(arg: T): BoolCheck<T> => {
-  if (Array.isArray(arg) && !arg.length) {
-    return { value: arg, is: false };
-  }
-  if (isObj(arg) && !Object.keys(arg as keyof T)) {
-    return { value: arg, is: false };
-  }
-  return { value: arg, is: !!arg };
+const updateAssignment = (
+  assign: Assignment,
+  propsToUpdate: Partial<Assignment>
+): Assignment => {
+  return { ...assign, ...propsToUpdate };
 };
 
-interface HasID {
-  id: number;
-}
-
-const processUser = <T extends HasID>(user: T): T => {
-  // Process the user logic here
-  return user;
-};
-console.log(processUser({ id: 1, name: "Dave" }));
-// console.log(processUser({ name: "Dave" }));
-
-const getUsersProperty = <T extends HasID, K extends keyof T>(
-  users: T[],
-  key: K
-): T[K][] => {
-  return users.map((user) => user[key]);
+const assign1: Assignment = {
+  studentId: "compsci123",
+  title: "Final Project",
+  grade: 0,
 };
 
-const usersArray = [
-  {
-    id: 1,
-    name: "Leanne Graham",
-    username: "Bret",
-    email: "Sincere@april.biz",
-    address: {
-      street: "Kulas Light",
-      suite: "Apt. 556",
-      city: "Gwenborough",
-      zipcode: "92998-3874",
-      geo: {
-        lat: "-37.3159",
-        lng: "81.1496",
-      },
-    },
-    phone: "1-770-736-8031 x56442",
-    website: "hildegard.org",
-    company: {
-      name: "Romaguera-Crona",
-      catchPhrase: "Multi-layered client-server neural-net",
-      bs: "harness real-time e-markets",
-    },
-  },
-  {
-    id: 2,
-    name: "Ervin Howell",
-    username: "Antonette",
-    email: "Shanna@melissa.tv",
-    address: {
-      street: "Victor Plains",
-      suite: "Suite 879",
-      city: "Wisokyburgh",
-      zipcode: "90566-7771",
-      geo: {
-        lat: "-43.9509",
-        lng: "-34.4618",
-      },
-    },
-    phone: "010-692-6593 x09125",
-    website: "anastasia.net",
-    company: {
-      name: "Deckow-Crist",
-      catchPhrase: "Proactive didactic contingency",
-      bs: "synergize scalable supply-chains",
-    },
-  },
-];
-
-console.log(getUsersProperty(usersArray, "email"));
-console.log(getUsersProperty(usersArray, "username"));
-
-///////////////////////////////////////
-
-class StateObject<T> {
-  private data: T;
-
-  constructor(value: T) {
-    this.data = value;
-  }
-
-  get state(): T {
-    return this.data;
-  }
-
-  set state(value: T) {
-    this.data = value;
-  }
-}
-
-const store = new StateObject("John");
-console.log(store.state);
-store.state = "Dave";
-//store.state = 12
-
-const myState = new StateObject<(string | number | boolean)[]>([15]);
-myState.state = ["Dave", 42, true];
-console.log(myState.state);
+console.log(updateAssignment(assign1, { grade: 95 }));
+const assignGraded: Assignment = updateAssignment(assign1, { grade: 95 });
